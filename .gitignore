@@ -1,2 +1,8 @@
 /target/
 /license.hdiv
+.settings
+/scorecard/
+/health/
+/hdivAgentLog.hlg
+/agent.config
+/.classpath

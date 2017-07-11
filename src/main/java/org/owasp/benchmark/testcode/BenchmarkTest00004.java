@@ -33,41 +33,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(value="/xxx/BenchmarkTest00003")
-public class BenchmarkTest00003 extends HttpServlet {
+@WebServlet(value="/xxx/BenchmarkTest00004")
+public class BenchmarkTest00004 extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/xxx/BenchmarkTest00003.html");
+		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/xxx/BenchmarkTest00004.html");
 		rd.include(request, response);
 	}
 	
-	public void testDeserialization_Safe() throws Exception {
-		BitSet bitset = new BitSet();
-		bitset.set(1, 2);
-		File serializedFile = serialize(bitset);
-		BitSet bitset2 = (BitSet) deserialize(serializedFile);
-	}
-	
-
-	private File serialize(final Serializable serializable) throws IOException {
-		File tmpFile = File.createTempFile("serial", ".ser");
-		FileOutputStream fos = new FileOutputStream(tmpFile);
-		ObjectOutputStream oos = new ObjectOutputStream(fos);
-		oos.writeObject(serializable);
-		oos.close();
-		fos.close();
-		return tmpFile;
+	public void testDeserialization_Unsafe() throws Exception {
+		/**
+		 * ATTACK PAYLOAD created with ysoserial
+		 * 
+		 * 1) Crashes the request 2) Opens a explorer window using Runtime.exec()
+		 * 
+		 */
+		deserialize();
 	}
 
-	private static Object deserialize(final File serializable) throws Exception {
-		FileInputStream fis = new FileInputStream(serializable);
-		ObjectInputStream ois = new ObjectInputStream(fis);
+	private Object deserialize() throws Exception {
+		ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/serialPayload.txt"));
 		Object object = ois.readObject();
 		ois.close();
-		fis.close();
 		return object;
 	}
 
@@ -76,14 +66,14 @@ public class BenchmarkTest00003 extends HttpServlet {
 		// some code
 		response.setContentType("text/html;charset=UTF-8");
 		try {
-			testDeserialization_Safe();
+			testDeserialization_Unsafe();
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		response.getWriter().println("Safe serialization executed executed");
+		response.getWriter().println("Unsafe serialization executed executed");
 	}
 	
 }

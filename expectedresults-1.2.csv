@@ -1,3 +1,5 @@
 # test name, category, real vulnerability, cwe, Benchmark version: 1.2, 2016-06-1
 BenchmarkTest00001,HEADER_INJECTION,true,0
 BenchmarkTest00002,UNVALIDATED_REDIRECT,true,0
+BenchmarkTest00003,UNTRUSTED_SERIALIZATION,false,0
+BenchmarkTest00004,UNTRUSTED_SERIALIZATION,true,0

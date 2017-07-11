@@ -10,6 +10,14 @@
 		tcType="SERVLET" tname="00002">
 		<formparam name="url" value="xxx/BenchmarkTest00002" />
 	</benchmarkTest>
+	<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest00003"
+		tcType="SERVLET" tname="00003">
+	</benchmarkTest>
+	<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest00004"
+		tcType="SERVLET" tname="00004">
+	</benchmarkTest>
 	<!-- benchmarkTest
 		URL="https://localhost:8443/benchmark/pathtraver-00/BenchmarkTest00002"
 		tcType="SERVLET" tname="00002">
