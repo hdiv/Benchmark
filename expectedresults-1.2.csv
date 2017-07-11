@@ -12,7 +12,7 @@ BenchmarkTest00010,weakrand,false,330
 BenchmarkTest00011,pathtraver,true,22
 BenchmarkTest00012,ldapi,true,90
 BenchmarkTest00013,xss,true,79
-BenchmarkTest00014,xss,true,79
+BenchmarkTest00014,xss,false,79
 BenchmarkTest00015,cmdi,true,78
 BenchmarkTest00016,securecookie,false,614
 BenchmarkTest00017,cmdi,true,78
