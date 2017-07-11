@@ -181,7 +181,7 @@
 								<properties>
 									<cargo.jvmargs>
 									    -Dhdiv.config.dir=HDIV_CONFIG_DIR -Dhdiv.agent.debug=true -Dhdiv.xss.advanced=true -Dhealth.reports.offline=true
-										-javaagent:HDIV_CONFIG_DIR -Dhdiv.file.level=FINE -Dhdiv.workingMode=FULL_DETECTION
+										-javaagent:HDIV_AGENT -Dhdiv.file.level=FINE -Dhdiv.workingMode=FULL_DETECTION
 										-Xdebug -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
 									</cargo.jvmargs>
 									<cargo.servlet.port>8443</cargo.servlet.port>
