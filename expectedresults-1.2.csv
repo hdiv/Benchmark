@@ -1,4 +1,3 @@
 # test name, category, real vulnerability, cwe, Benchmark version: 1.2, 2016-06-1
-BenchmarkTest00001,xxx,true,0
-BenchmarkTest00002,xxx,true,0
-BenchmarkTest00003,xxx,true,0
+BenchmarkTest00001,HEADER_INJECTION,true,0
+BenchmarkTest00002,UNVALIDATED_REDIRECT,true,0

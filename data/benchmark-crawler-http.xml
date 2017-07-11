@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <benchmarkSuite version="1.2">
 	<benchmarkTest
-		URL="https://localhost:8443/benchmark/pathtraver-00/BenchmarkTest00001"
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest00001"
 		tcType="SERVLET" tname="00001">
-		<cookie name="BenchmarkTest00001" value="FileName" />
-		<payload value="FileName" />
+		<formparam name="url" value="xxx/BenchmarkTest00001" />
 	</benchmarkTest>
 	<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest00002"
+		tcType="SERVLET" tname="00002">
+		<formparam name="url" value="xxx/BenchmarkTest00002" />
+	</benchmarkTest>
+	<!-- benchmarkTest
 		URL="https://localhost:8443/benchmark/pathtraver-00/BenchmarkTest00002"
 		tcType="SERVLET" tname="00002">
 		<cookie name="BenchmarkTest00002" value="FileName" />
@@ -39,6 +43,6 @@
 		<formparam name="password" value="" />
 		<formparam name="email" value="" />
 		<payload value="someSecret" />
-	</benchmarkTest>
+	</benchmarkTest-->
 
 </benchmarkSuite>

@@ -26,19 +26,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(value="/pathtraver-00/BenchmarkTest00001")
+@WebServlet(value="/xxx/BenchmarkTest00001")
 public class BenchmarkTest00001 extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		javax.servlet.http.Cookie userCookie = new javax.servlet.http.Cookie("BenchmarkTest00001", "FileName");
-		userCookie.setMaxAge(60*3); //Store cookie for 3 minutes
-		userCookie.setSecure(true);
-		userCookie.setPath(request.getRequestURI());
-		response.addCookie(userCookie);
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/pathtraver-00/BenchmarkTest00001.html");
+		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/xxx/BenchmarkTest00001.html");
 		rd.include(request, response);
 	}
 
@@ -47,48 +42,11 @@ public class BenchmarkTest00001 extends HttpServlet {
 		// some code
 		response.setContentType("text/html;charset=UTF-8");
 		
-
-		javax.servlet.http.Cookie[] theCookies = request.getCookies();
+		String url = request.getParameter("url");
 		
-		String param = "noCookieValueSupplied";
-		if (theCookies != null) {
-			for (javax.servlet.http.Cookie theCookie : theCookies) {
-				if (theCookie.getName().equals("BenchmarkTest00001")) {
-					param = java.net.URLDecoder.decode(theCookie.getValue(), "UTF-8");
-					break;
-				}
-			}
-		}
-
+		response.addHeader("Location", request.getContextPath() + "/" + url);
+		response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY); // SC_FOUND = 302
 		
-        String fileName = null;
-        java.io.FileInputStream fis = null;
-
-        try {
-          fileName = org.owasp.benchmark.helpers.Utils.testfileDir + param;
-          fis = new java.io.FileInputStream(new java.io.File(fileName));
-          byte[] b = new byte[1000];
-          int size = fis.read(b);
-          response.getWriter().println(
-            "The beginning of file: '" + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName)
-              + "' is:\n\n" + org.owasp.esapi.ESAPI.encoder().encodeForHTML(new String(b,0,size))
-          );
-        } catch (Exception e) {
-            System.out.println("Couldn't open FileInputStream on file: '" + fileName + "'");
-            response.getWriter().println(
-              "Problem getting FileInputStream: "
-                 + org.owasp.esapi.ESAPI.encoder().encodeForHTML(e.getMessage())
-            );
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                    fis = null;
-                } catch (Exception e) {
-                    // we tried...
-                }
-            }
-        }
 	}
 	
 }

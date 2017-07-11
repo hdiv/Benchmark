@@ -94,7 +94,7 @@ public class HdivReader extends Reader {
 
 			try {
 				tcr.setCWE(0);
-				tcr.setCategory("xxx");
+				tcr.setCategory(type);
 
 				try {
 					tcr.setNumber(Integer.parseInt(testNumber));
@@ -105,10 +105,10 @@ public class HdivReader extends Reader {
 
 				System.out.println(tcr);
 
-				if (tcr.getCWE() != 0) {
+
 					// System.out.println( tcr.getNumber() + "\t" + tcr.getCWE() + "\t" + tcr.getCategory() );
 					tr.put(tcr);
-				}
+
 			}
 			catch (Exception e) {
 				if (invalid.add(type)) {
@@ -119,40 +119,5 @@ public class HdivReader extends Reader {
 		}
 	}
 
-	// private static int cweLookup(final String rule) {
-	// switch (rule) {
-	// case "hql-injection":
-	// return 564; // hql injection
-	// case "unsafe-readline":
-	// return 0000; // unsafe readline
-	// case "xpath-injection":
-	// return 643; // xpath injection
-	// case "xxe":
-	// return 611; // xml entity
-	// }
-	// return 0;
-	// }
-
-	enum Type {
-
-		XPATH_INJECTION(643), SQL_INJECTION(89), CMD_INJECTION(78), PATH_TRAVERSAL(22), TRUST_BOUNDARY_VIOLATION(501), WEAK_RANDOMNESS(
-				"crypto-weak-randomness",
-				330), INSECURE_HASHING("crypto-bad-mac", 328), INSECURE_CIPHER("crypto-bad-ciphers", 327), REFLECTION_INJECTION(0), XSS(
-						"reflected-xss", 79), HEADER_INJECTION(113), INSECURE_COOKIE("cookie-flags-missing", 614), LDAP_INJECTION(90);
-
-		private final int number;
-
-		private final String id;
-
-		private Type(final int number) {
-			this.number = number;
-			id = name().toLowerCase().replaceAll("_", "-");
-		}
-
-		private Type(final String id, final int number) {
-			this.number = number;
-			this.id = id;
-		}
-	}
 
 }
