@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet(value="/xxx/BenchmarkTest00004")
+@WebServlet(value="/xxx/BenchmarkTest00005")
 public class BenchmarkTest00005 extends SimpleBenchmarkTest {
 
 
