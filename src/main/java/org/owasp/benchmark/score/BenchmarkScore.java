@@ -406,6 +406,9 @@ public class BenchmarkScore {
                 	actualResultsFileName = produceResultsFile (expectedResults);
                 }
                 
+                System.exit(-1);
+                
+                /*
                 Map<String,Counter> scores = calculateScores( expectedResults );
             
                 OverallResults results = calculateResults( scores );
@@ -420,7 +423,7 @@ public class BenchmarkScore {
                 
                 // This is for debugging purposes. It indicates how may extra results were found in the
                 // actual results vice the expected results.
-                // printExtraCWE( expectedResults, actualResults );
+                // printExtraCWE( expectedResults, actualResults );*/
             }
             else {
             	if ( expectedResults == null) {

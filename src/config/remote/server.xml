@@ -42,7 +42,7 @@
             username="sa"
             password=""
             driverClassName="org.hsqldb.jdbc.JDBCDriver"
-            url="jdbc:hsqldb:hsql://localhost/benchmarkDataBase;file:benchmark.db;sql.enforce_size=false;shutdown=false;"
+            url="jdbc:hsqldb:hsql://localhost:9137/benchmarkDataBase;file:benchmark.db;sql.enforce_size=false;shutdown=false;"
             maxTotal="12"
             maxIdle="2"
             maxWaitMillis="5000"
