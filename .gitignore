@@ -6,3 +6,5 @@
 /hdivAgentLog.hlg
 /agent.config
 /.classpath
+/.project
+/messageStore
