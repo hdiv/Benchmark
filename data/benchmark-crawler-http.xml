@@ -18,6 +18,10 @@
 		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest00004"
 		tcType="SERVLET" tname="00004">
 	</benchmarkTest>
+		<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest00005"
+		tcType="SERVLET" tname="00005">
+	</benchmarkTest>
 	<!-- benchmarkTest
 		URL="https://localhost:8443/benchmark/pathtraver-00/BenchmarkTest00002"
 		tcType="SERVLET" tname="00002">
