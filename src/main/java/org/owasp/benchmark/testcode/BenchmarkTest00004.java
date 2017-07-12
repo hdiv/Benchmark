@@ -18,33 +18,18 @@
 
 package org.owasp.benchmark.testcode;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.BitSet;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@SuppressWarnings("serial")
 @WebServlet(value="/xxx/BenchmarkTest00004")
-public class BenchmarkTest00004 extends HttpServlet {
+public class BenchmarkTest00004 extends SimpleBenchmarkTest {
 	
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/xxx/BenchmarkTest00004.html");
-		rd.include(request, response);
-	}
-	
-	public void testDeserialization_Unsafe() throws Exception {
+	private void testDeserialization_Unsafe() throws Exception {
 		/**
 		 * ATTACK PAYLOAD created with ysoserial
 		 * 
@@ -63,8 +48,7 @@ public class BenchmarkTest00004 extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// some code
-		response.setContentType("text/html;charset=UTF-8");
+		
 		try {
 			testDeserialization_Unsafe();
 		}
@@ -72,8 +56,7 @@ public class BenchmarkTest00004 extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		response.getWriter().println("Unsafe serialization executed executed");
+		println(response, "Unsafe serialization executed executed");
 	}
 	
 }

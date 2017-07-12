@@ -22,28 +22,16 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@SuppressWarnings("serial")
 @WebServlet(value="/xxx/BenchmarkTest00002")
-public class BenchmarkTest00002 extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/xxx/BenchmarkTest00002.html");
-		rd.include(request, response);
-	}
+public class BenchmarkTest00002 extends SimpleBenchmarkTest {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// some code
-		response.setContentType("text/html;charset=UTF-8");
-		
-		String url = request.getParameter("url");
-		response.sendRedirect(request.getContextPath() + "/" + url);
+		response.sendRedirect(request.getContextPath() + "/" + request.getParameter("url"));
 	}
 	
 }

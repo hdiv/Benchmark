@@ -29,26 +29,18 @@ import java.util.BitSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@SuppressWarnings("serial")
 @WebServlet(value="/xxx/BenchmarkTest00003")
-public class BenchmarkTest00003 extends HttpServlet {
+public class BenchmarkTest00003 extends SimpleBenchmarkTest {
 	
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/xxx/BenchmarkTest00003.html");
-		rd.include(request, response);
-	}
-	
-	public void testDeserialization_Safe() throws Exception {
+	private void testDeserialization_Safe() throws Exception {
 		BitSet bitset = new BitSet();
 		bitset.set(1, 2);
 		File serializedFile = serialize(bitset);
-		BitSet bitset2 = (BitSet) deserialize(serializedFile);
+		deserialize(serializedFile);
 	}
 	
 
@@ -73,8 +65,6 @@ public class BenchmarkTest00003 extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// some code
-		response.setContentType("text/html;charset=UTF-8");
 		try {
 			testDeserialization_Safe();
 		}
@@ -82,8 +72,7 @@ public class BenchmarkTest00003 extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		response.getWriter().println("Safe serialization executed executed");
+		println(response, "Safe serialization executed executed");
 	}
 	
 }
