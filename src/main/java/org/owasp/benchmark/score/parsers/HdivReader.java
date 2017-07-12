@@ -93,7 +93,7 @@ public class HdivReader extends Reader {
 			String type = line.substring(line.indexOf("type=") + 5, line.indexOf(',', line.indexOf("type=")));
 
 			try {
-				tcr.setCWE(0);
+				tcr.setCWE(type.hashCode());
 				tcr.setCategory(type);
 
 				try {
