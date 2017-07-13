@@ -25,21 +25,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hdiv.ee.commons.threat.VulnerabilityType;
+import org.owasp.benchmark.tools.agent.AgentController;
+
 @SuppressWarnings("serial")
-@WebServlet(value="/xxx/BenchmarkTest01001")
-public class BenchmarkTest01001 extends SimpleBenchmarkTest {
+@WebServlet(value="/xxx/BenchmarkTest01002")
+public class BenchmarkTest01002 extends SimpleBenchmarkTest {
 
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			AgentController.blocking(VulnerabilityType.PATH_TRAVERSAL, true);
 			new File(request.getParameter("url"));
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			AgentController.blocking(VulnerabilityType.PATH_TRAVERSAL, false);
 		}
-		println(response, "Path traversal attack notification executed");
+		println(response, "Path traversal attack protection executed");
 	}
 	
 }

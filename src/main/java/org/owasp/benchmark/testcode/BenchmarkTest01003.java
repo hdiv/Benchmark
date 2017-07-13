@@ -18,28 +18,36 @@
 
 package org.owasp.benchmark.testcode;
 
-import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@SuppressWarnings("serial")
-@WebServlet(value="/xxx/BenchmarkTest01001")
-public class BenchmarkTest01001 extends SimpleBenchmarkTest {
+import org.hdiv.ee.commons.threat.VulnerabilityType;
+import org.owasp.benchmark.tools.agent.AgentController;
 
+@SuppressWarnings("serial")
+@WebServlet(value = "/xxx/BenchmarkTest01003")
+public class BenchmarkTest01003 extends SimpleBenchmarkTest {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			new File(request.getParameter("url"));
+			AgentController.blocking(VulnerabilityType.SQL_INJECTION, true);
+			String sql = "INSERT INTO users (username, password) VALUES ('foo','" + request.getParameter("url") + "')";
+
+			java.sql.Statement statement = org.owasp.benchmark.helpers.DatabaseHelper.getSqlStatement();
+			int count = statement.executeUpdate(sql);
+			org.owasp.benchmark.helpers.DatabaseHelper.outputUpdateComplete(sql, response);
+
 		}
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		println(response, "Path traversal attack notification executed");
+		finally {
+			AgentController.blocking(VulnerabilityType.SQL_INJECTION, false);
+		}
+		println(response, "Path traversal attack protection executed");
 	}
-	
+
 }

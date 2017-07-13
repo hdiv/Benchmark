@@ -31,6 +31,17 @@
 		tcType="SERVLET" tname="01001">
 		<formparam name="url" value="../../etc/passwd" />
 	</benchmarkTest>
+	<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01002"
+		tcType="SERVLET" tname="01002">
+		<formparam name="url" value="../../etc/passwd" />
+	</benchmarkTest>
+	<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01003"
+		tcType="SERVLET" tname="01003">
+
+		<formparam name="url" value="../../etc/passwd" />
+	</benchmarkTest>
 	<!-- benchmarkTest
 		URL="https://localhost:8443/benchmark/pathtraver-00/BenchmarkTest00002"
 		tcType="SERVLET" tname="00002">
