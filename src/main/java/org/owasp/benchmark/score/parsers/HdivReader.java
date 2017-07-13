@@ -37,6 +37,15 @@ public class HdivReader extends Reader {
 				line = reader.readLine();
 				if (line != null) {
 					if (line.contains("SourceCodeVulnerability [")||line.contains("Attack [")) {
+						boolean attack = line.contains("Attack [");
+						String preffix = "";
+						if(line.contains("Attack [")) {
+							if(line.contains("blocking request")) {
+								preffix = "ATTACK_BLOCKED";
+							} else {
+								preffix = "ATTACK";
+							}
+						}
 						// ok, we're starting a new URL, so process this one and start the next chunk
 						process(tr, testNumber, Arrays.asList(line), line.contains("Attack [")?"ATTACK_":"");
 						chunk.clear();
