@@ -36,9 +36,9 @@ public class HdivReader extends Reader {
 			try {
 				line = reader.readLine();
 				if (line != null) {
-					if (line.contains("SourceCodeVulnerability [")) {
+					if (line.contains("SourceCodeVulnerability [")||line.contains("Attack [")) {
 						// ok, we're starting a new URL, so process this one and start the next chunk
-						process(tr, testNumber, Arrays.asList(line));
+						process(tr, testNumber, Arrays.asList(line), line.contains("Attack [")?"ATTACK_":"");
 						chunk.clear();
 						testNumber = "00000";
 						String fname = "/" + BenchmarkScore.BENCHMARKTESTNAME;
@@ -80,7 +80,7 @@ public class HdivReader extends Reader {
 		return null;
 	}
 
-	private void process(final TestResults tr, String testNumber, final List<String> chunk) throws Exception {
+	private void process(final TestResults tr, String testNumber, final List<String> chunk, String preffix) throws Exception {
 		for (String line : chunk) {
 			TestCaseResult tcr = new TestCaseResult();
 
@@ -90,7 +90,7 @@ public class HdivReader extends Reader {
 				testNumber = line.substring(idx + fname.length(), idx + fname.length() + 5);
 			}
 
-			String type = line.substring(line.indexOf("type=") + 5, line.indexOf(',', line.indexOf("type=")));
+			String type = preffix + line.substring(line.indexOf("type=") + 5, line.indexOf(',', line.indexOf("type=")));
 
 			try {
 				tcr.setCWE(type.hashCode());
