@@ -104,10 +104,7 @@ public class HdivReader extends Reader {
 					System.out.println("> Parse error: " + line);
 				}
 
-				System.out.println(tcr);
-
 				if (tcr.getCWE() != 0) {
-					// System.out.println( tcr.getNumber() + "\t" + tcr.getCWE() + "\t" + tcr.getCategory() );
 					tr.put(tcr);
 				}
 			}
@@ -119,20 +116,6 @@ public class HdivReader extends Reader {
 
 		}
 	}
-
-	// private static int cweLookup(final String rule) {
-	// switch (rule) {
-	// case "hql-injection":
-	// return 564; // hql injection
-	// case "unsafe-readline":
-	// return 0000; // unsafe readline
-	// case "xpath-injection":
-	// return 643; // xpath injection
-	// case "xxe":
-	// return 611; // xml entity
-	// }
-	// return 0;
-	// }
 
 	enum Type {
 
