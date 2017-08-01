@@ -19,6 +19,7 @@
 package org.owasp.benchmark.testcode;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ import org.owasp.benchmark.tools.agent.AgentController;
 public class BenchmarkTest01003 extends SimpleBenchmarkTest {
 
 	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
 		try {
 			AgentController.blocking(VulnerabilityType.SQL_INJECTION, true);
 			String sql = "INSERT INTO users (username, password) VALUES ('foo','" + request.getParameter("url") + "')";
@@ -47,7 +48,7 @@ public class BenchmarkTest01003 extends SimpleBenchmarkTest {
 		finally {
 			AgentController.blocking(VulnerabilityType.SQL_INJECTION, false);
 		}
-		println(response, "Path traversal attack protection executed");
+		println(response, "SQL_INJECTION attack protection executed");
 	}
 
 }

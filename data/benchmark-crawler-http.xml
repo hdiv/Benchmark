@@ -40,41 +40,6 @@
 		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01003"
 		tcType="SERVLET" tname="01003">
 
-		<formparam name="url" value="../../etc/passwd" />
+		<formparam name="url" value="1' or '1'='1'" />
 	</benchmarkTest>
-	<!-- benchmarkTest
-		URL="https://localhost:8443/benchmark/pathtraver-00/BenchmarkTest00002"
-		tcType="SERVLET" tname="00002">
-		<cookie name="BenchmarkTest00002" value="FileName" />
-		<payload value="FileName" />
-	</benchmarkTest>
-	<benchmarkTest
-		URL="https://localhost:8443/benchmark/hash-00/BenchmarkTest00003"
-		tcType="SERVLET" tname="00003">
-		<cookie name="BenchmarkTest00003" value="someSecret" />
-		<payload value="someSecret" />
-	</benchmarkTest>
-	<benchmarkTest
-		URL="https://localhost:8443/benchmark/crypto-00/BenchmarkTest00005"
-		tcType="SERVLET" tname="00005">
-		<header name="BenchmarkTest00005" value="someSecret" />
-		<payload value="someSecret" />
-	</benchmarkTest>
-	<benchmarkTest
-		URL="https://localhost:8443/benchmark/ldapi-00/BenchmarkTest00021"
-		tcType="SERVLET" tname="00021">
-		<getparam name="BenchmarkTest00021" value="Ms Bar" />
-		<getparam name="password" value="" />
-		<getparam name="username" value="" />
-		<payload value="Ms Bar" />
-	</benchmarkTest>
-	<benchmarkTest
-		URL="https://localhost:8443/benchmark/hash-00/BenchmarkTest00022"
-		tcType="SERVLET" tname="00022">
-		<formparam name="BenchmarkTest00022" value="someSecret" />
-		<formparam name="password" value="" />
-		<formparam name="email" value="" />
-		<payload value="someSecret" />
-	</benchmarkTest-->
-
 </benchmarkSuite>
