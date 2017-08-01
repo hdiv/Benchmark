@@ -14,12 +14,11 @@ import org.owasp.benchmark.helpers.Utils;
 public class AgentController {
 
 	public static void main(final String[] args) {
-		enable("UNVALIDATED_REDIRECT", false);
 		System.out.println(status("REQUEST_DOS"));
 	}
 
-	public static void enable(final String analyzer, final boolean enable) {
-		ctrl("analyzers/status/" + analyzer + "/" + (enable ? "enable" : "disable"));
+	public static void enable(final VulnerabilityType analyzer, final boolean enable) {
+		ctrl("analyzers/status/" + analyzer.name() + "/" + (enable ? "enable" : "disable"));
 	}
 
 	public static void blocking(final VulnerabilityType analyzer, final boolean enable) {
@@ -38,8 +37,8 @@ public class AgentController {
 		return call("configuration/" + analyzer);
 	}
 
-	public void setProperty(final String property, final String value) {
-		call("configuration/" + property + "/" + value);
+	public static void setProperty(final String property, final String value) {
+		call("control/configuration/" + property + "/" + value);
 	}
 
 	private static String call(final String path) {
@@ -63,4 +62,24 @@ public class AgentController {
 		return null;
 	}
 
+	public static String plainCall(final String path) {
+		try (CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(Utils.getSSLFactory()).build()) {
+			HttpGet get = new HttpGet(path);
+			try (CloseableHttpResponse response = httpclient.execute(get)) {
+				System.out.println(get);
+				System.out.println(response.getStatusLine());
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				IOUtils.copy(response.getEntity().getContent(), out);
+				return new String(out.toByteArray());
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

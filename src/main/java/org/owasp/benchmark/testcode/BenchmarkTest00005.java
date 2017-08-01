@@ -19,27 +19,48 @@
 package org.owasp.benchmark.testcode;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hdiv.ee.commons.threat.VulnerabilityType;
+import org.owasp.benchmark.tools.agent.AgentController;
+
 @SuppressWarnings("serial")
-@WebServlet(value="/xxx/BenchmarkTest00005")
+@WebServlet(value = "/xxx/BenchmarkTest00005")
 public class BenchmarkTest00005 extends SimpleBenchmarkTest {
 
-
 	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+
 		try {
-			
+			AgentController.enable(VulnerabilityType.REQUEST_DOS, true);
+			AgentController.enable(VulnerabilityType.MALICIOUS_IP, true);
+
+			AgentController.setProperty("request_dos.attackBlackList.2",
+					URLEncoder.encode("{\"ip\": \"=:.\", \"maxRequestNumber\": 2, \"windowDurationSeconds\": 60}"));
+
+			AgentController.setProperty("malicious_ip.ipExpirationTimeSeconds", "3");
+
+			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00005.html");
+			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00005.html");
+			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00005.html");
+
+			Thread.sleep(3000);
 		}
 		catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		println(response, "Unsafe serialization executed executed");
+		finally {
+			AgentController.enable(VulnerabilityType.REQUEST_DOS, false);
+			AgentController.enable(VulnerabilityType.MALICIOUS_IP, false);
+		}
+
+		println(response, "REQUEST_DOS executed.");
+
 	}
-	
+
 }
