@@ -36,18 +36,18 @@ public class HdivReader extends Reader {
 			try {
 				line = reader.readLine();
 				if (line != null) {
-					if (line.contains("SourceCodeVulnerability [")||line.contains("Attack [")) {
-						boolean attack = line.contains("Attack [");
+					if (line.contains("SourceCodeVulnerability [") || line.contains("Attack [")) {
 						String preffix = "";
-						if(line.contains("Attack [")) {
-							if(line.contains("blocking request")) {
-								preffix = "ATTACK_BLOCKED";
-							} else {
-								preffix = "ATTACK";
+						if (line.contains("Attack [")) {
+							if (line.contains("blocking request")) {
+								preffix = "ATTACK_BLOCKED_";
+							}
+							else {
+								preffix = "ATTACK_";
 							}
 						}
 						// ok, we're starting a new URL, so process this one and start the next chunk
-						process(tr, testNumber, Arrays.asList(line), line.contains("Attack [")?"ATTACK_":"");
+						process(tr, testNumber, Arrays.asList(line), preffix);
 						chunk.clear();
 						testNumber = "00000";
 						String fname = "/" + BenchmarkScore.BENCHMARKTESTNAME;
