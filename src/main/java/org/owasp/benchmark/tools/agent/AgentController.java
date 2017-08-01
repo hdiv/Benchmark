@@ -13,36 +13,36 @@ import org.owasp.benchmark.helpers.Utils;
 
 public class AgentController {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		enable("UNVALIDATED_REDIRECT", false);
 		System.out.println(status("REQUEST_DOS"));
 	}
 
-	public static void enable(String analyzer, boolean enable) {
-		ctrl("analyzers/status/" + analyzer + "/" + (enable?"enable":"disable"));
-	}
-	
-	public static void blocking(VulnerabilityType analyzer, boolean enable) {
-		ctrl("analyzers/blocking/" + analyzer.name().toLowerCase() + "/" + (enable?"enable":"disable"));
-	}
-	
-	public static void cmd(String analyzer, String cmd) {
-		ctrl("analyzers/cmd/" + analyzer + "/" + cmd);
-	}
-	
-	private static void ctrl(String path) {
-		call("control/"+path);
-	}
-	
-	public static String status(String analyzer) {
-		return call("configuration/" + analyzer);
-	}
-	
-	public void setProperty(String property, String value) {
-		call("configuration/"+property+"/"+value);
+	public static void enable(final String analyzer, final boolean enable) {
+		ctrl("analyzers/status/" + analyzer + "/" + (enable ? "enable" : "disable"));
 	}
 
-	private static String call(String path) {
+	public static void blocking(final VulnerabilityType analyzer, final boolean enable) {
+		ctrl("analyzers/blocking/" + analyzer.name() + "/" + (enable ? "enable" : "disable"));
+	}
+
+	public static void cmd(final String analyzer, final String cmd) {
+		ctrl("analyzers/cmd/" + analyzer + "/" + cmd);
+	}
+
+	private static void ctrl(final String path) {
+		call("control/" + path);
+	}
+
+	public static String status(final String analyzer) {
+		return call("configuration/" + analyzer);
+	}
+
+	public void setProperty(final String property, final String value) {
+		call("configuration/" + property + "/" + value);
+	}
+
+	private static String call(final String path) {
 		try (CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(Utils.getSSLFactory()).build()) {
 			HttpGet get = new HttpGet("https://127.0.0.1:8443/benchmark/hdiv-devtool/" + path);
 			try (CloseableHttpResponse response = httpclient.execute(get)) {
