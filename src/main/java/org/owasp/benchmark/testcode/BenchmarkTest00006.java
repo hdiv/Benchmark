@@ -19,27 +19,54 @@
 package org.owasp.benchmark.testcode;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hdiv.ee.commons.threat.VulnerabilityType;
+import org.owasp.benchmark.tools.agent.AgentController;
+
 @SuppressWarnings("serial")
-@WebServlet(value="/xxx/BenchmarkTest00006")
+@WebServlet(value = "/xxx/BenchmarkTest00006")
 public class BenchmarkTest00006 extends SimpleBenchmarkTest {
 
-
 	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+
 		try {
-			
+			AgentController.enable(VulnerabilityType.REQUEST_DOS, true);
+			AgentController.enable(VulnerabilityType.MALICIOUS_IP, true);
+			AgentController.blocking(VulnerabilityType.REQUEST_DOS, true);
+
+			AgentController.setProperty("request_dos.attackBlackList.1",
+					URLEncoder.encode("{\"ip\": \"=:.\", \"maxRequestNumber\": 2, \"windowDurationSeconds\": 60}"));
+
+			AgentController.setProperty("malicious_ip.ipExpirationTimeSeconds", "3");
+
+			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00006.html");
+			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00006.html");
+			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00006.html");
+
+			AgentController.setProperty("request_dos.attackBlackList.1",
+					URLEncoder.encode("{\"ip\": \"=:.\", \"maxRequestNumber\": 1000, \"windowDurationSeconds\": 60}"));
+
+			Thread.sleep(3000);
 		}
 		catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		println(response, "Unsafe serialization executed executed");
+		finally {
+			AgentController.enable(VulnerabilityType.REQUEST_DOS, false);
+			AgentController.enable(VulnerabilityType.MALICIOUS_IP, false);
+			AgentController.blocking(VulnerabilityType.REQUEST_DOS, false);
+
+		}
+
+		println(response, "REQUEST_DOS executed.");
+
 	}
-	
+
 }
