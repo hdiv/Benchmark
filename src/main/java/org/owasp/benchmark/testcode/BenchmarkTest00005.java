@@ -40,7 +40,7 @@ public class BenchmarkTest00005 extends SimpleBenchmarkTest {
 			AgentController.enable(VulnerabilityType.REQUEST_DOS, true);
 			AgentController.enable(VulnerabilityType.MALICIOUS_IP, true);
 
-			AgentController.setProperty("request_dos.attackBlackList.2",
+			AgentController.setProperty("request_dos.attackBlackList.1",
 					URLEncoder.encode("{\"ip\": \"=:.\", \"maxRequestNumber\": 2, \"windowDurationSeconds\": 60}"));
 
 			AgentController.setProperty("malicious_ip.ipExpirationTimeSeconds", "3");
@@ -48,6 +48,9 @@ public class BenchmarkTest00005 extends SimpleBenchmarkTest {
 			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00005.html");
 			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00005.html");
 			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00005.html");
+
+			AgentController.setProperty("request_dos.attackBlackList.1",
+					URLEncoder.encode("{\"ip\": \"=:.\", \"maxRequestNumber\": 1000, \"windowDurationSeconds\": 60}"));
 
 			Thread.sleep(3000);
 		}
