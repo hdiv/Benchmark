@@ -23,10 +23,6 @@
 		tcType="SERVLET" tname="00005">
 	</benchmarkTest>
 	<benchmarkTest
-		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest00006"
-		tcType="SERVLET" tname="00006">
-	</benchmarkTest>
-	<benchmarkTest
 		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01001"
 		tcType="SERVLET" tname="01001">
 		<formparam name="url" value="../../etc/passwd" />
@@ -48,4 +44,12 @@
 
 		<formparam name="param" value="script>alert('hello')" />
 	</benchmarkTest>
+		<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01005"
+		tcType="SERVLET" tname="01005">
+	</benchmarkTest>
+		<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01006"
+		tcType="SERVLET" tname="01006">
+	</benchmarkTest>	
 </benchmarkSuite>

@@ -30,8 +30,8 @@ import org.hdiv.ee.commons.threat.VulnerabilityType;
 import org.owasp.benchmark.tools.agent.AgentController;
 
 @SuppressWarnings("serial")
-@WebServlet(value = "/xxx/BenchmarkTest00006")
-public class BenchmarkTest00006 extends SimpleBenchmarkTest {
+@WebServlet(value = "/xxx/BenchmarkTest01006")
+public class BenchmarkTest01006 extends SimpleBenchmarkTest {
 
 	@Override
 	public void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
@@ -46,9 +46,9 @@ public class BenchmarkTest00006 extends SimpleBenchmarkTest {
 
 			AgentController.setProperty("malicious_ip.ipExpirationTimeSeconds", "3");
 
-			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00006.html");
-			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00006.html");
-			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest00006.html");
+			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest01006.html");
+			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest01006.html");
+			AgentController.plainCall("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest01006.html");
 
 			AgentController.setProperty("request_dos.attackBlackList.1",
 					URLEncoder.encode("{\"ip\": \"=:.\", \"maxRequestNumber\": 1000, \"windowDurationSeconds\": 60}"));

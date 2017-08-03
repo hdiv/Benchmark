@@ -82,4 +82,27 @@ public class AgentController {
 		}
 		return null;
 	}
+
+	public static String plainCallWithHeader(final String path, final String headerName, final String headerValue) {
+
+		try (CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(Utils.getSSLFactory()).build()) {
+			HttpGet get = new HttpGet(path);
+			get.setHeader(headerName, headerValue);
+			try (CloseableHttpResponse response = httpclient.execute(get)) {
+				System.out.println(get);
+				System.out.println(response.getStatusLine());
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				IOUtils.copy(response.getEntity().getContent(), out);
+				return new String(out.toByteArray());
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
