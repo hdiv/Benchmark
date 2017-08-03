@@ -55,5 +55,9 @@
 		<benchmarkTest
 		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01007"
 		tcType="SERVLET" tname="01007">
-	</benchmarkTest>		
+	</benchmarkTest>
+		<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01008"
+		tcType="SERVLET" tname="01008">
+	</benchmarkTest>				
 </benchmarkSuite>

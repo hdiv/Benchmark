@@ -42,11 +42,11 @@ import org.owasp.benchmark.helpers.Utils;
 import org.owasp.benchmark.tools.agent.AgentController;
 
 @SuppressWarnings("serial")
-@WebServlet(value = "/xxx/BenchmarkTest01007")
+@WebServlet(value = "/xxx/BenchmarkTest01008")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50)
-public class BenchmarkTest01007 extends SimpleBenchmarkTest {
+public class BenchmarkTest01008 extends SimpleBenchmarkTest {
 
 	@Override
 	public void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
@@ -63,12 +63,12 @@ public class BenchmarkTest01007 extends SimpleBenchmarkTest {
 			try {
 				httpClient = HttpClients.custom().setSSLSocketFactory(Utils.getSSLFactory()).build();
 
-				HttpPost uploadFile = new HttpPost("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest01007");
+				HttpPost uploadFile = new HttpPost("https://127.0.0.1:8443/benchmark/xxx/BenchmarkTest01008");
 				MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 				builder.addTextBody("field1", "yes", ContentType.TEXT_PLAIN);
 
 				// This attaches the file to the POST:
-				File f = new File(getClass().getClassLoader().getResource("eicar.com").getFile());
+				File f = new File(getClass().getClassLoader().getResource("context.xml").getFile());
 				builder.addBinaryBody("file", new FileInputStream(f), ContentType.APPLICATION_OCTET_STREAM, f.getName());
 
 				HttpEntity multipart = builder.build();
@@ -86,13 +86,11 @@ public class BenchmarkTest01007 extends SimpleBenchmarkTest {
 
 		}
 		else {
-
 			for (Part part : request.getParts()) {
 				System.out.println(part.toString());
 			}
 
 			System.out.println("File uploaded.");
-
 		}
 
 	}
