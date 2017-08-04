@@ -22,6 +22,11 @@
 		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest00005"
 		tcType="SERVLET" tname="00005">
 	</benchmarkTest>
+		<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest00006"
+		tcType="SERVLET" tname="00006">
+		<formparam name="type" value="StringCommand" />		
+	</benchmarkTest>	
 	<benchmarkTest
 		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01001"
 		tcType="SERVLET" tname="01001">
