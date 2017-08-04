@@ -59,5 +59,17 @@
 		<benchmarkTest
 		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01008"
 		tcType="SERVLET" tname="01008">
-	</benchmarkTest>				
+	</benchmarkTest>
+		<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01009"
+		tcType="SERVLET" tname="01009">
+		
+		<formparam name="url" value="nonattack" />
+	</benchmarkTest>
+		<benchmarkTest
+		URL="https://localhost:8443/benchmark/xxx/BenchmarkTest01010"
+		tcType="SERVLET" tname="01010">
+		
+		<formparam name="param" value="nonattack" />
+	</benchmarkTest>						
 </benchmarkSuite>
